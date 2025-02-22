@@ -13,12 +13,22 @@ def cleanRoom(grid: List[List[int]], r: int, c: int, direction: int) -> int:
     Returns:
     - Minimum number of steps required to clean the entire room
     """
+    # Validate input first
+    if not grid or not grid[0]:
+        raise ValueError("Grid cannot be empty")
+    
+    rows, cols = len(grid), len(grid[0])
+    
+    # Check if start position is valid
+    if not (0 <= r < rows and 0 <= c < cols):
+        raise IndexError("Starting position is out of grid bounds")
+    
+    if grid[r][c] == 1:
+        raise IndexError("Starting position is an obstacle")
+    
     # Directions: North, East, South, West
     dr = [-1, 0, 1, 0]
     dc = [0, 1, 0, -1]
-    
-    # Get room dimensions
-    rows, cols = len(grid), len(grid[0])
     
     # Track visited cells and cleaned cells
     visited = set()
@@ -32,6 +42,10 @@ def cleanRoom(grid: List[List[int]], r: int, c: int, direction: int) -> int:
     
     def dfs(r: int, c: int, direction: int) -> int:
         """Depth-first search to clean the room"""
+        # Stop if cell is already visited
+        if (r, c) in visited:
+            return 0
+        
         # Mark current cell as visited and cleaned
         visited.add((r, c))
         cleaned.add((r, c))
