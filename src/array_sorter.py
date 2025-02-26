@@ -27,17 +27,26 @@ def sort_array_with_even_squares(arr):
     # Sort array to maintain overall ascending order
     sorted_arr = sorted(arr)
     
-    # Create an index of even numbers
-    even_indices = [i for i, x in enumerate(sorted_arr) if x % 2 == 0]
+    # Separate even and odd elements
+    odds = [x for x in sorted_arr if x % 2 != 0]
+    evens = [x for x in sorted_arr if x % 2 == 0]
     
-    # Create a list of squared even numbers to be sorted in descending order
-    squared_even_numbers = sorted([x**2 for x in sorted_arr if x % 2 == 0], reverse=True)
+    # Sort even squares in descending order
+    squared_evens = sorted([x**2 for x in evens], reverse=True)
     
-    # Create copy of sorted array to modify
-    result = sorted_arr.copy()
+    # Merge odd and even (squared) lists back together
+    result = []
+    odd_index = 0
+    even_index = 0
     
-    # Replace even numbers with their squared values in descending order
-    for idx, square in zip(even_indices, squared_even_numbers):
-        result[idx] = square
+    for num in sorted_arr:
+        if num % 2 == 0:
+            # Add squared even number
+            result.append(squared_evens[even_index])
+            even_index += 1
+        else:
+            # Add odd number as is
+            result.append(odds[odd_index])
+            odd_index += 1
     
     return result
