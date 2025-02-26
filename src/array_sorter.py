@@ -34,19 +34,19 @@ def sort_array_with_even_squares(arr):
     # Square and sort even numbers in descending order
     squared_evens = sorted([x**2 for x in evens], reverse=True)
     
-    # Reconstruct the array maintaining original order of odd numbers
+    # Create result list following exact pattern
     result = []
-    odd_idx = 0
-    even_idx = 0
+    odd_index = 0
+    even_index = 0
     
     for num in sorted_arr:
-        if num % 2 == 0:
-            # Add squared even number from descending list
-            result.append(squared_evens[even_idx])
-            even_idx += 1
+        if num % 2 != 0:
+            # Add odd numbers first
+            result.append(odds[odd_index])
+            odd_index += 1
         else:
-            # Add original odd number
-            result.append(odds[odd_idx])
-            odd_idx += 1
+            # Add squared even numbers
+            result.append(squared_evens[even_index])
+            even_index += 1
     
     return result
