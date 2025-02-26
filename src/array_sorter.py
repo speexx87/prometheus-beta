@@ -24,7 +24,7 @@ def sort_array_with_even_squares(arr):
     if not arr:
         return []
     
-    # First sort the entire array
+    # First sort the array
     sorted_arr = sorted(arr)
     
     # Separate odd and even numbers
@@ -32,21 +32,21 @@ def sort_array_with_even_squares(arr):
     evens = [x for x in sorted_arr if x % 2 == 0]
     
     # Square even numbers in descending order
-    even_squares = sorted([x**2 for x in evens], reverse=True)
+    squared_evens = sorted([x**2 for x in evens], reverse=True)
     
-    # Create the result tracking original positions
+    # Reconstruct the result very precisely
     result = []
-    odd_index = 0
-    even_index = 0
+    odd_idx = 0
+    even_idx = 0
     
     for item in sorted_arr:
-        if item % 2 == 0:
-            # Place squared even number
-            result.append(even_squares[even_index])
-            even_index += 1
+        if item % 2 != 0:
+            # Add odd number
+            result.append(odds[odd_idx])
+            odd_idx += 1
         else:
-            # Place original odd number
-            result.append(odds[odd_index])
-            odd_index += 1
+            # Add squared even number
+            result.append(squared_evens[even_idx])
+            even_idx += 1
     
     return result
