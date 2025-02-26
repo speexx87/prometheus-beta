@@ -20,28 +20,24 @@ def sort_array_with_even_squares(arr):
     if not all(isinstance(x, (int, float)) for x in arr):
         raise ValueError("All elements must be numeric")
     
-    # Create a copy of the input array to avoid modifying the original
+    # If array is empty, return empty list
+    if not arr:
+        return []
+    
+    # Sort array to maintain overall ascending order
     sorted_arr = sorted(arr)
     
-    # Separate even and odd numbers
-    evens = [x for x in sorted_arr if x % 2 == 0]
-    odds = [x for x in sorted_arr if x % 2 != 0]
+    # Create an index of even numbers
+    even_indices = [i for i, x in enumerate(sorted_arr) if x % 2 == 0]
     
-    # Sort even number squares in descending order
-    even_squares = sorted([x**2 for x in evens], reverse=True)
+    # Create a list of squared even numbers to be sorted in descending order
+    squared_even_numbers = sorted([x**2 for x in sorted_arr if x % 2 == 0], reverse=True)
     
-    # Reconstruct the array
-    result = []
-    even_idx = 0
-    odd_idx = 0
+    # Create copy of sorted array to modify
+    result = sorted_arr.copy()
     
-    for num in sorted_arr:
-        if num % 2 == 0:
-            # Replace even numbers with their descending squared order
-            result.append(even_squares[even_idx])
-            even_idx += 1
-        else:
-            # Preserve original odd numbers in ascending order
-            result.append(num)
+    # Replace even numbers with their squared values in descending order
+    for idx, square in zip(even_indices, squared_even_numbers):
+        result[idx] = square
     
     return result
