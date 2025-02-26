@@ -24,28 +24,28 @@ def sort_array_with_even_squares(arr):
     if not arr:
         return []
     
-    # Sort array to maintain overall ascending order
+    # Sort the array first
     sorted_arr = sorted(arr)
     
     # Separate odd and even numbers
     odds = [x for x in sorted_arr if x % 2 != 0]
     evens = [x for x in sorted_arr if x % 2 == 0]
     
-    # Square and sort even numbers in descending order
-    squared_evens = sorted([x**2 for x in evens], reverse=True)
+    # Square even numbers in descending order
+    squared_evens = sorted([x**2 for x in sorted(evens)], reverse=True)
     
-    # Reconstruct the result
+    # Create result by carefully interweaving
     result = []
     odd_idx = 0
     even_idx = 0
     
-    for num in sorted_arr:
-        if num % 2 == 0:
-            # Replace even number with its squared value
+    for item in sorted_arr:
+        if item % 2 == 0:
+            # Add squared even number
             result.append(squared_evens[even_idx])
             even_idx += 1
         else:
-            # Keep original odd number
+            # Add original odd number
             result.append(odds[odd_idx])
             odd_idx += 1
     
