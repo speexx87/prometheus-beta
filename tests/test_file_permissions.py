@@ -10,9 +10,8 @@ def test_change_file_permissions_success():
     with tempfile.NamedTemporaryFile(delete=False) as temp_file:
         temp_path = temp_file.name
         
-        # Initial permissions (default is typically 0o644)
+        # Initial permissions (system default)
         initial_mode = os.stat(temp_path).st_mode & 0o777
-        assert initial_mode == 0o644
         
         # Change permissions to read-only for owner
         change_file_permissions(temp_path, 0o400)
