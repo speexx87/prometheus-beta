@@ -13,12 +13,16 @@ def hex_to_decimal(hex_string: str) -> int:
     Raises:
         ValueError: If the input is not a valid hexadecimal string.
     """
+    # Handle None or empty string
+    if not hex_string:
+        raise ValueError("Invalid hexadecimal string: empty input")
+
     # Remove '0x' or '0X' prefix if present
     if hex_string.startswith(('0x', '0X')):
         hex_string = hex_string[2:]
     
     # Validate input
-    if not all(c in '0123456789abcdefABCDEF' for c in hex_string):
+    if not hex_string or not all(c in '0123456789abcdefABCDEF' for c in hex_string):
         raise ValueError(f"Invalid hexadecimal string: {hex_string}")
     
     # Convert to decimal using built-in int() function with base 16
