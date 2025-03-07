@@ -39,7 +39,7 @@ def test_dynamic_progress_bar_with_generator():
     captured_output = io.StringIO()
     sys.stdout = captured_output
     
-    for item in dynamic_progress_bar(test_generator()):
+    for item in dynamic_progress_bar(test_generator(), total=5):
         processed_items.append(item)
     
     # Restore stdout
