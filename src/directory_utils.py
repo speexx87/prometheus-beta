@@ -1,5 +1,4 @@
 import os
-import typing
 import re
 
 
@@ -19,19 +18,20 @@ def create_directory(path: str, mode: int = 0o755) -> bool:
         OSError: For other OS-related errors during directory creation
         ValueError: For invalid path characters
     """
-    # Validate path characters
-    if re.search(r'[<>:"/\\|?*]', path):
-        raise ValueError(f"Invalid characters in path: {path}")
-
     # Normalize the path to handle potential inconsistent path separators
     normalized_path = os.path.normpath(path)
+
+    # Check for invalid characters in just the filename, not full path
+    filename = os.path.basename(normalized_path)
+    if re.search(r'[<>:"/\\|?*]', filename):
+        raise ValueError(f"Invalid characters in filename: {filename}")
 
     # Check if directory already exists
     if os.path.exists(normalized_path):
         return False
 
     try:
-        # Create directory with specified permissions
+        # Attempt to create directory with specified permissions
         os.makedirs(normalized_path, mode=mode, exist_ok=False)
         return True
     except PermissionError:
