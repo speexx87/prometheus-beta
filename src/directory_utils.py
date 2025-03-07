@@ -1,5 +1,6 @@
 import os
 import typing
+import re
 
 
 def create_directory(path: str, mode: int = 0o755) -> bool:
@@ -16,7 +17,12 @@ def create_directory(path: str, mode: int = 0o755) -> bool:
     Raises:
         PermissionError: If insufficient permissions to create directory
         OSError: For other OS-related errors during directory creation
+        ValueError: For invalid path characters
     """
+    # Validate path characters
+    if re.search(r'[<>:"/\\|?*]', path):
+        raise ValueError(f"Invalid characters in path: {path}")
+
     # Normalize the path to handle potential inconsistent path separators
     normalized_path = os.path.normpath(path)
 
