@@ -32,15 +32,21 @@ def dynamic_progress_bar(iterable, total=None, prefix='Progress:',
         try:
             total = len(iterable)
         except TypeError:
+            # For generators, we'll just work with known iterations
             total = None
     
+    # Track iterations
+    count = 0
+    
     # Iterate over the items
-    for i, item in enumerate(iterable, 1):
-        # Ensure we can calculate progress
+    for item in iterable:
+        count += 1
+        
+        # If total is known, print progress bar
         if total is not None:
             # Calculate percentage and bar length
-            percent = ("{0:." + str(decimals) + "f}").format(100 * (i / float(total)))
-            filled_length = int(length * i // total)
+            percent = ("{0:." + str(decimals) + "f}").format(100 * (count / float(total)))
+            filled_length = int(length * count // total)
             bar = fill * filled_length + '-' * (length - filled_length)
             
             # Print progress bar
@@ -48,8 +54,9 @@ def dynamic_progress_bar(iterable, total=None, prefix='Progress:',
         
         yield item
     
-    # Print newline on completion
-    print()
+    # If total was known or last iteration occurred
+    if total is not None or count > 0:
+        print()
 
 def log_progress(iterable, **kwargs):
     """
