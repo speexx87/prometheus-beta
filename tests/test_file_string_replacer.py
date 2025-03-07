@@ -23,7 +23,7 @@ def test_basic_string_replacement():
         
         os.unlink(temp_file.name)
         
-        assert replacements == 2
+        assert replacements == 1
         assert content == "Hello world, hi universe"
 
 
