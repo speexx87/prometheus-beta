@@ -17,16 +17,16 @@ def bitonic_sort(arr, ascending=True):
         TypeError: If input is not a list
         ValueError: If list contains elements that cannot be compared
     """
-    # Create a copy to avoid modifying the original list
-    arr = list(arr)
-    
     # Validate input
     if not isinstance(arr, list):
         raise TypeError("Input must be a list")
     
     # Handle empty or single-element lists
     if len(arr) <= 1:
-        return arr
+        return arr.copy()
+
+    # Create a copy to avoid modifying the original list
+    arr = arr.copy()
 
     def compare_and_swap(arr, i, j, direction):
         """
@@ -81,18 +81,16 @@ def bitonic_sort(arr, ascending=True):
             # Merge the entire sequence
             bitonic_merge(arr, low, count, direction)
 
-    # Ensure the list length is a power of 2 by padding
-    original_length = len(arr)
+    # Find the next power of 2 that is greater than or equal to list length
     power_of_two = 1
-    while power_of_two < original_length:
+    while power_of_two < len(arr):
         power_of_two *= 2
-    
-    # Pad the list with the last element if necessary
-    while len(arr) < power_of_two:
-        arr.append(arr[-1])
 
+    # Pad the list to the next power of 2
+    padded_arr = arr + [arr[-1]] * (power_of_two - len(arr))
+    
     # Perform bitonic sort
-    bitonic_sort_recursive(arr, 0, len(arr), ascending)
+    bitonic_sort_recursive(padded_arr, 0, len(padded_arr), ascending)
     
     # Return only the original number of elements
-    return arr[:original_length]
+    return padded_arr[:len(arr)]
