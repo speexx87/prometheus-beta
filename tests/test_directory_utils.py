@@ -51,7 +51,7 @@ def test_create_directory_permission_error(monkeypatch):
 
 def test_create_directory_invalid_path():
     """Test creating directory with invalid path characters"""
-    with pytest.raises(ValueError, match="Invalid characters in path"):
+    with pytest.raises(ValueError, match="Invalid characters in filename"):
         create_directory('invalid:path')
 
 
