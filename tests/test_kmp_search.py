@@ -12,7 +12,7 @@ def test_compute_lps_array():
 
 def test_kmp_search_basic():
     # Test basic string matching
-    assert kmp_search('ABABDABACDABABCABAB', 'ABABCABAB') == [9]
+    assert kmp_search('ABABDABACDABABCABAB', 'ABABCABAB') == [10]
     assert kmp_search('AABAACAADAABAABA', 'AABA') == [0, 9, 12]
     
     # Test multiple occurrences
@@ -52,4 +52,4 @@ def test_complex_pattern():
     # Test a more complex pattern with repeated subsequences
     text = 'PARTICIPATE IN PARACHUTE'
     pattern = 'PARA'
-    assert kmp_search(text, pattern) == [2, 17]
+    assert kmp_search(text, pattern) == [15]
