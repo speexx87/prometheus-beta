@@ -6,7 +6,6 @@ string within a file, with robust error handling and flexibility.
 """
 
 import os
-import re
 
 
 def replace_string_in_file(file_path, old_string, new_string):
@@ -41,16 +40,9 @@ def replace_string_in_file(file_path, old_string, new_string):
     with open(file_path, 'r') as file:
         file_contents = file.read()
     
-    # Count and replace case-insensitive occurrences while preserving original case
-    def replace_func(match):
-        return match.group(0).replace(match.group(0), new_string)
-    
-    modified_contents, replacements = re.subn(
-        re.escape(old_string), 
-        replace_func, 
-        file_contents, 
-        flags=re.IGNORECASE
-    )
+    # Case-sensitive string replacement
+    modified_contents = file_contents.replace(old_string, new_string)
+    replacements = file_contents.count(old_string)
     
     # Write back to file
     with open(file_path, 'w') as file:
