@@ -8,6 +8,9 @@ def generate_all_substrings(input_string):
     Returns:
         list: A list of all possible substrings of the input string.
 
+    Raises:
+        TypeError: If the input is not a string.
+
     Examples:
         >>> generate_all_substrings("abc")
         ['a', 'ab', 'abc', 'b', 'bc', 'c']
@@ -16,6 +19,10 @@ def generate_all_substrings(input_string):
         >>> generate_all_substrings("x")
         ['x']
     """
+    # Check input type
+    if not isinstance(input_string, str):
+        raise TypeError("Input must be a string")
+    
     # Handle empty string case
     if not input_string:
         return []
