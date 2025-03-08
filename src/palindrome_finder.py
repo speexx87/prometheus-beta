@@ -29,9 +29,9 @@ def find_palindrome_substrings(input_string):
             # Extract substring
             substring = input_string[start:end]
             
-            # Check if substring is a palindrome
+            # Check if substring is a palindrome (length > 1)
             if substring == substring[::-1] and len(substring) > 1:
                 palindromes.add(substring)
     
-    # Sort palindromes by length (descending) and then alphabetically
+    # Sort palindromes first by length (descending), then alphabetically
     return sorted(list(palindromes), key=lambda x: (-len(x), x))
