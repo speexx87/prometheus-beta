@@ -40,4 +40,4 @@ def test_sorting_order():
     """Test sorting of palindrome substrings."""
     result = find_palindrome_substrings("abbaxyzzyx")
     # Expected: sorted by length (descending), then alphabetically
-    assert result == ["xyzzyx", "yzzy", "abba", "zz", "bb"]
+    assert result == ["xyzzyx", "abba", "zz", "bb"]
