@@ -22,7 +22,7 @@ def test_remove_duplicate_chars_multiple_repeats():
 
 def test_remove_duplicate_chars_mixed_repeats():
     """Test strings with mixed repeat patterns"""
-    assert remove_chars_over_twice("aabbccddeeefff") == "aabbccddeeeff"
+    assert remove_chars_over_twice("aabbccddeeefff") == "aabbccddeeff"
 
 def test_invalid_input_type():
     """Test handling of non-string inputs"""
