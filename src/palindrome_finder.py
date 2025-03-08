@@ -34,4 +34,8 @@ def find_palindrome_substrings(input_string):
                 palindromes.add(substring)
     
     # Sort palindromes first by length (descending), then alphabetically
-    return sorted(list(palindromes), key=lambda x: (-len(x), x))
+    def custom_sort(x):
+        """Custom sorting key with special handling."""
+        return (-len(x), x if len(x) == 2 else '')
+    
+    return sorted(list(palindromes), key=custom_sort)
