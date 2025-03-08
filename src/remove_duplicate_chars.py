@@ -31,15 +31,12 @@ def remove_chars_over_twice(input_string):
     
     # Build result string, keeping chars that appear 1 or 2 times
     result = []
-    seen_chars = {}
     for char in input_string:
-        if char_counts[char] > 2:
-            # For chars that appear more than twice, allow only 2 occurrences
-            if seen_chars.get(char, 0) < 2:
-                result.append(char)
-                seen_chars[char] = seen_chars.get(char, 0) + 1
-        else:
-            # For chars that appear 1 or 2 times, keep all
+        # Count current occurrences of the character in the result
+        current_char_count = result.count(char)
+        
+        # Only append if character appears less than 2 times, or total count is less than original count
+        if (current_char_count < 2) or (char_counts[char] > 2 and current_char_count < 2):
             result.append(char)
     
     return ''.join(result)
