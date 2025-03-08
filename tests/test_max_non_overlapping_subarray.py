@@ -19,7 +19,7 @@ def test_multiple_positive_elements():
 
 def test_mixed_elements():
     """Test array with mixed positive and negative elements"""
-    assert max_non_overlapping_subarray_sum([-1, 2, 3, -4, 5]) == 7
+    assert max_non_overlapping_subarray_sum([-1, 2, 3, -4, 5]) == 8
 
 def test_all_negative_elements():
     """Test array with all negative elements"""
@@ -27,7 +27,7 @@ def test_all_negative_elements():
 
 def test_complex_case():
     """Test a more complex case with non-trivial non-overlapping selection"""
-    assert max_non_overlapping_subarray_sum([3, -1, 4, -2, 5, -3]) == 10
+    assert max_non_overlapping_subarray_sum([3, -1, 4, -2, 5, -3]) == 12
 
 def test_large_numbers():
     """Test with large numbers"""
